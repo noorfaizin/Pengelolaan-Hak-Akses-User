@@ -18,7 +18,7 @@ class Login extends CI_Controller {
             if($this->session->userdata('verif_akun') == 1){
                 redirect('user_dashboard');
             }else{
-                $data['judul'] = "K⍜PIKU | Log In User";
+                $data['judul'] = "K⍜PIKU | Masuk";
                 $this->load->model('cart/M_Cart');
                 $data['cart']= $this->M_Cart->get_data();
                 $data['sum_jumlah']= $this->M_Cart->jumlah_cart();
@@ -32,15 +32,15 @@ class Login extends CI_Controller {
         }
     }
     private function _login(){
-         $username = $this->input->post('username');
-         $password = md5($this->input->post('password'));
-         $user = $this->M_account->get($username);
+        $username = $this->input->post('username');
+        $password = md5($this->input->post('password'));
+        $user = $this->M_account->get($username);
          
-         if(empty($user)){
+        if(empty($user)){
              //flashdata
 			$this->session->set_flashdata('message', '<div class="alert alert-light alert-dismissible text-danger" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>Akun belum terdaftar!</div>');
 			redirect('login');
-         }else{
+        }else{
             if($password == $user->password){
 				$session = array(
 					'username'	=>$user->username,
@@ -56,10 +56,12 @@ class Login extends CI_Controller {
 					if($this->session->userdata('role') == 'admin'){
 						redirect('dashboard');
 					}else{
+                        $this->session->set_flashdata('message', '<div id="message-center" class="modal fade"><div class="modal-dialog" style=";margin-top:150px;"><div class="modal-content"><div class="row"><img class="mx-auto bg-white" src="'.base_url('assets/dist/gif/check.gif').'" width="150px" style=";margin-top:-70px;border-radius:100px"></div><div class="modal-body"><p class="font-weight-bold">Selamat datang di K⍜PIKU | My Account.</p><p>Silahkan berbelanja ditoko kami, selamat mencoba menu dan produk kami, dan nantikan diskon yang akan datang!!</p><br><button class="btn btn-warning btn-block" type="button" data-dismiss="modal" >OK</button></div></div></div></div>');
 						redirect('user_dashboard');
 					}
 				}else{
-					$this->session->set_flashdata('message', '<div class="alert alert-light alert-dismissible text-danger" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>Akun anda belum terverifikasi!<br>Silahkan verifikasi akun terlebih dahulu</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-light alert-dismissible text-danger" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>Akun anda belum terverifikasi!<br>Silahkan verifikasi akun terlebih dahulu<br>
+                    <small><a class="text-black" href="#">klik disini</a><small></div>');
 					redirect('login');
 				}
 			}else{
@@ -125,7 +127,7 @@ class Login extends CI_Controller {
             'protocol'   => 'smtp',
             'smtp_host'  => 'ssl://smtp.googlemail.com',
             'smtp_user'  => 'kopiqucoffee@gmail.com',
-            'smtp_pass'  => 'kuduskopiqu123',
+            'smtp_pass'  => 'kopiqukuduscoffee2020',
             'smtp_port'  => 465,
             'mailtype'   => 'html',
             'charset'    => 'utf-8',
@@ -190,9 +192,8 @@ class Login extends CI_Controller {
     }
 
     public function logout(){
-        //flashdata
-        $this->session->set_flashdata('message', '<div class="alert alert-light alert-dismissible text-success" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>Anda sudah logout!</div>');
-		$this->session->sess_destroy();
-		redirect('login');
+        $this->session->sess_destroy();
+        $this->session->set_flashdata('message', '<div id="message" class="alert alert-dismissible shadow text-left text-success font-weight-bold" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><div class="row"><div class="col-md-2"><img src="'.base_url('assets/dist/gif/check-circle.gif').'" width="70px"></div><div class="col-md">Data akun telah diperbarui!</div></div></div>');
+        redirect('login');
     }
 }
