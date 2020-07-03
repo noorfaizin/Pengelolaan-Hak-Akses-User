@@ -1,5 +1,4 @@
 <!------- MY ACCOUNT ------->
-
     <div class="row col-md-9 ml-3 mt-3">
       <div class="col-md-12">
         <h4 class="alert alert-light font-weight-bold"><i class="fas fa-usd mr-2"></i>Transaksi</h4>
@@ -9,33 +8,36 @@
               <div class="col-md-12">
                 <strong class="text-danger">Keranjang belanja kosong!</strong> silahkan memilih produk terlebih dahulu.
               </div>
-              <img class="mt-3" alt="foto" src="<?php echo base_url('gambar/box-null.png')?>" style="width:150px;"><br>
+              <img class="mt-3" alt="foto" src="<?php echo base_url('assets/dist/img/box-null.png')?>" style="width:150px;"><br>
               <a class="mt-5" href="<?php echo base_url('produk')?>"><div class="btn btn-warning btn-md">
                 <i class="fas fa-cart-plus"></i> Belanja Sekarang
               </div></a>
             </div>
           <?php } else { ?>
             <div class="row col-md-12">
-              <div class="row col-md-6">
+              <div class="col-md-6">
                 <table class="table table-bordered">
-                <thead class="bg-warning">
-                  <tr>
-                    <th class="text-center" width="1px">NO</th>
-                    <th class="text-center">Pesanan Anda</th>
-                    <th class="text-center" width="120px">Hapus</th>
-                  </tr>
-                </thead>
-                <?php 
-                $no=1;
-                $total_bayar = 0;
-                foreach ($cart->result() as $row){ ?>
-                  <tr>
-                    <td class="text-center"><?php echo $no++; ?></td>
-                    <td><?php echo $row->prod_name; ?></td>
-                    <td align="center"><?php echo anchor('cart/delete_cart_transaction/'.$row->prod_id,'<div class="btn btn-sm btn-danger mx-auto"><i class="fas fa-trash"></i></div>')?></td>
-                  </tr>
-                <?php $total_bayar+=$row->total_harga; }?>
+                  <thead class="bg-warning">
+                    <tr>
+                      <th class="text-center" width="1px">NO</th>
+                      <th class="text-center">Pesanan Anda</th>
+                      <th class="text-center" width="120px">Hapus</th>
+                    </tr>
+                  </thead>
+                  <?php 
+                    $no=1;
+                    $total_bayar = 0;
+                    foreach ($cart->result() as $row){ ?>
+                      <tr>
+                        <td class="text-center"><?php echo $no++; ?></td>
+                        <td><?php echo $row->prod_name; ?></td>
+                        <td align="center"><?php echo anchor('cart/delete_cart_transaction/'.$row->prod_id,'<div class="btn btn-sm btn-danger mx-auto"><i class="fas fa-trash"></i></div>')?></td>
+                      </tr>
+                  <?php $total_bayar+=$row->total_harga; }?>
                 </table>
+                <div class="row">
+                  <a href="<?php echo base_url('cart')?>"><div class="btn btn-dark btn-sm"><i class="fas fa-shopping-cart"></i> Keranjang Belanja</div></a>
+                </div>
               </div>
               <div class="row col-md-1">
               </div>
