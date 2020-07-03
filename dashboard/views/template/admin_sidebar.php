@@ -10,6 +10,18 @@
     <ul class="navbar-nav ml-auto">
         <li class="breadcrumb-item text-weight-bold">
             <li class="nav-item mr-2">
+                <form id="form_search" action="<?= site_url('dashboard/search');?>" method="post">
+                    <div class="ml-5 input-group">
+                    <div id="prefetch">
+                        <input type="text" name="caridata" class="form-control input-lg typeahead" id="caridata" placeholder="Cari Produk" autocomplete="on" style="width:280px;border-radius:5px 0 0 5px;">
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-warning" type="submit" name="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                    </div>
+                </form>
+            </li>
+            <li class="nav-item mr-2">
                 <a class="nav-link" href="<?php echo base_url('cart_beli/detail_cart')?>">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="badge badge-danger navbar-badge"><?php echo $sum_jumlah->jumlah; ?></span>
@@ -37,7 +49,7 @@
         <!-- USER ADMIN -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?php echo base_url('gambar/admin.png')?>" class="img-circle elevation-2" alt="User Image">
+                <img src="<?php echo base_url('assets/dist/img/admin.png')?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <div class="text-white"><?= $users['nama'];?></div>

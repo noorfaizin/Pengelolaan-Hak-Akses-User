@@ -20,4 +20,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/kolomproduk.css')?>">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Search Autocomplete -->
+    <link rel="stylesheet" href="<?= base_url('assets/dist/css/responsive.css')?>">
+
 </head>
