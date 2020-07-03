@@ -19,6 +19,8 @@ class Login extends CI_Controller {
                 redirect('user_dashboard');
             }else{
                 $data['judul'] = "K⍜PIKU | Masuk";
+                $data['users']= $this->db->get_where('users', ['username' =>
+		        $this->session->userdata('username')])->row_array();
                 $this->load->model('cart/M_Cart');
                 $data['cart']= $this->M_Cart->get_data();
                 $data['sum_jumlah']= $this->M_Cart->jumlah_cart();
@@ -60,8 +62,8 @@ class Login extends CI_Controller {
 						redirect('user_dashboard');
 					}
 				}else{
-                    $this->session->set_flashdata('message', '<div class="alert alert-light alert-dismissible text-danger" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>Akun anda belum terverifikasi!<br>Silahkan verifikasi akun terlebih dahulu<br>
-                    <small><a class="text-black" href="#">klik disini</a><small></div>');
+                    $this->session->set_flashdata('message', '<div id="message" class="alert alert-dismissible shadow" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><div class="row"><div class="col-md-2"><img src="'.base_url('assets/dist/gif/warning-blink.gif').'" width="70px"></div><div class="col-md">Akun anda belum terverifikasi!<br>Silahkan verifikasi akun terlebih dahulu<br>
+                    <small><a class="text-primary" href="#">klik disini</a><small></div></div></div>');
 					redirect('login');
 				}
 			}else{
@@ -86,6 +88,8 @@ class Login extends CI_Controller {
         $valid->set_rules('password_conf','Repeat Password','required|trim|matches[password]');
         if($valid->run() == false){
             $data['judul'] = "User Registration";
+            $data['users']= $this->db->get_where('users', ['username' =>
+            $this->session->userdata('username')])->row_array();
             $this->load->model('cart/M_Cart');
             $data['cart']= $this->M_Cart->get_data();
             $data['sum_jumlah']= $this->M_Cart->jumlah_cart();
@@ -117,21 +121,23 @@ class Login extends CI_Controller {
             $this->db->insert('user_token', $user_token);
             //Kirim email
             $this->_sendEmail($token, 'verify');
-            $this->session->set_flashdata('message', '<div class="alert alert-light alert-dismissible text-success" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>Registrasi berhasil!<br>Silahkan verifikasi akun diemail anda</div>');
+            $this->session->set_flashdata('message', '<div id="message-center" class="modal fade"><div class="modal-dialog" style=";margin-top:150px;"><div class="modal-content"><div class="row"><img class="mx-auto bg-white" src="'.base_url('assets/dist/gif/check.gif').'" width="150px" style=";margin-top:-70px;border-radius:100px"></div><div class="modal-body"><p class="font-weight-bold text-left">Registrasi berhasil!<br>Silahkan verifikasi akun diemail anda<br><button class="btn btn-warning btn-block" type="button" data-dismiss="modal" >OK</button></div></div></div></div>');
             redirect('login');
         }
     }
 
     private function _sendEmail($token, $type){
         $config = [
-            'protocol'   => 'smtp',
-            'smtp_host'  => 'ssl://smtp.googlemail.com',
-            'smtp_user'  => 'kopiqucoffee@gmail.com',
-            'smtp_pass'  => 'kopiqukuduscoffee2020',
-            'smtp_port'  => 465,
-            'mailtype'   => 'html',
-            'charset'    => 'utf-8',
-            'newline'    => "\r\n"
+            'mailtype'    => 'html',
+            'charset'     => 'utf-8',
+            'protocol'    => 'smtp',
+            'smtp_host'   => 'smtp.gmail.com',
+            'smtp_user'   => 'kopiqucoffee@gmail.com',  // Email gmail
+            'smtp_pass'   => 'kopiqukuduscoffee2020',  // Password gmail
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'        => "\r\n",
+            'newline'     => "\r\n"
         ];
         $this->load->library('email', $config);
         $this->email->initialize($config);
