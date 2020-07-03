@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <h4 class="alert alert-light font-weight-bold"><i class="fas fa-cog fa-spin mr-2"></i>Pengaturan Akun</h4>
           <div class="row justify-content-end mr-1">
-            <a href="<?= base_url('user_dashboard/nonaktif');?>" type="button" class="btn btn-light text-danger" data-dismiss="modal">Nonaktifkan Akun</a>
+            <button data-toggle="modal" data-target="#nonaktif" type="button" class="btn btn-light text-danger" data-dismiss="modal"><i class="fas fa-power-off"></i> Nonaktifkan Akun</button>
           </div>
         <div class="row col-md-12">
             <h3 class="mx-auto mt-3 mb-4">Edit data akun</h3>

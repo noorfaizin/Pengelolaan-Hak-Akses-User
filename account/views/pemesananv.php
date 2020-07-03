@@ -1,4 +1,4 @@
-<div class="row col-md-12 mx-auto p-5">
+<div class="row col-md-12 mx-auto p-5 bg-light">
     <div class="row col-md-12 mx-auto">
         <h1 class="mx-auto text-black font-weight-bold font-weight-bold">PROSES PEMESANAN</h1>
     </div>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="card-footer p-0">
-                    <a href="<?= base_url('user_login');?>" class="btn btn-warning btn-md btn-block" style="cursor:pointer;">Masuk / Daftar</a>
+                    <a href="<?= base_url('login');?>" class="btn btn-warning btn-md btn-block" style="cursor:pointer;">Masuk / Daftar</a>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
                         </h6>
                     </div>
                     <div class="card-footer p-0">
-                        <a href="<?= base_url('cart/detail_cart');?>" class="btn btn-warning btn-md btn-block" style="cursor:pointer;">Keranjang Belanja</a>
+                        <a href="<?= base_url('cart');?>" class="btn btn-warning btn-md btn-block" style="cursor:pointer;">Keranjang Belanja</a>
                     </div>
                 </div>
             </div>
